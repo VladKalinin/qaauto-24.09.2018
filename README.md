@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Automation Framework setup guide (for Mac)
 
 ## Download the following components:
@@ -57,3 +56,9 @@ Use the Terminal:
 # qaauto-24.09.2018
 QA Start Up cources
 >>>>>>> 63f5c92aa5b6403290aa24dfab854c8d9a11504d
+
+
+Some information regarding two files:
+pom.xml - Stores information regarding your project/test and your dependencies
+.gitignore - file, which stores the folders/file extension which should NOT be pulled to GitHub
+
