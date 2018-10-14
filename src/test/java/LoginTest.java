@@ -47,9 +47,15 @@ public class LoginTest {
         // need if statement
         //Assert.assertEquals("actual", "expected", "error message");
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/", "Home page URL is wrong");
-        Assert.assertEquals(webIdLogIn, webDriver.findElement(By.id(webIdLogIn)).getAttribute("id"));
-        Assert.assertEquals(webIdPassword, webDriver.findElement(By.id(webIdPassword)).getAttribute("id"));
-        Assert.assertEquals(signInButtonId, webDriver.findElement(By.id(signInButtonId)).getAttribute("id"));
+
+        Assert.assertTrue(webDriver.getPageSource().contains(webIdLogIn));
+        Assert.assertTrue(webDriver.getPageSource().contains(webIdPassword));
+        Assert.assertTrue(webDriver.getPageSource().contains(signInButtonId));
+
+        //Assert.assertEquals(webIdLogIn, webDriver.findElement(By.id(webIdLogIn)).getAttribute("id"));
+        //Assert.assertEquals(webIdPassword, webDriver.findElement(By.id(webIdPassword)).getAttribute("id"));
+        //Assert.assertEquals(signInButtonId, webDriver.findElement(By.id(signInButtonId)).getAttribute("id"));
+
 
         webDriver.findElement(By.id(webIdLogIn)).clear();
         webDriver.findElement(By.id(webIdLogIn)).sendKeys(logInEmail);
