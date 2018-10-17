@@ -59,19 +59,27 @@ public class LoginTest {
 
     @Test
     public void negativeLoginTest() throws InterruptedException {
-        //WebDriver webDriver = new FirefoxDriver();
         webDriver.get("https://www.linkedin.com");
-        WebElement emailField = webDriver.findElement(By.xpath("//input[@class='login-email']"));
-        WebElement passwordField = webDriver.findElement(By.xpath("//input[@class='login-password']"));
-        WebElement signInButton = webDriver.findElement(By.id("login-submit"));
+        LoginPage loginPage = new LoginPage(webDriver);
+
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/", "Home Page URL is wrong");
-        //Assert.assertEquals(webDriver.getTitle(), "LinkedIn: Log In or Sign Up", "Title is wrong"); - lang troubles(EN-RUS)
-        Assert.assertEquals(signInButton.isDisplayed(), true, "Sign In button is absent");
-        emailField.sendKeys("a@b.c");
-        passwordField.sendKeys("");
-        signInButton.click();
-        sleep(3000);
-        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/", "Home Page URL is wrong");
-        //webDriver.quit();
+
+        loginPage.login("a@b.c","");
+
+        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/", "Page URL is wrong");
     }
+
+    @Test
+    public void negativePasswordTest() throws InterruptedException {
+        webDriver.get("https://www.linkedin.com");
+        LoginPage loginPage = new LoginPage(webDriver);
+
+        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/", "Home Page URL is wrong");
+
+        loginPage.login("vlad.kalinin.qa24@gmail.com","Test123!");
+
+        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME", "Login Submit Page URL is wrong");
+    }
+
+
 }
