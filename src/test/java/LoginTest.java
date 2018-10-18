@@ -43,7 +43,7 @@ public class LoginTest {
      * - Close Firefox - done
      */
 
-    @Test
+    @Test(priority = 3)
     public void successfulLoginTest() throws InterruptedException {
         //WebDriver webDriver = new FirefoxDriver();
         webDriver.get("https://www.linkedin.com");
@@ -51,14 +51,19 @@ public class LoginTest {
 
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/", "Home Page URL is wrong");
 
+        Assert.assertEquals(webDriver.getTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is not correct");
+        Assert.assertTrue(loginPage.signInButton.isDisplayed(), "SignIn button is not displayed on Login Page");
+
         loginPage.login("vlad.kalinin.qa24@gmail.com","vvkalinin20");
 
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/feed/", "Home Page URL is wrong");
+        Assert.assertEquals(webDriver.getTitle(), "LinkedIn", "Home page title is wrong");
+        //li[@id='profile-nav-item']
 
     }
 
-    @Test
-    public void negativeLoginTest() throws InterruptedException {
+    @Test(priority = 1)
+    public void negativeEmailPasswordTest() throws InterruptedException {
         webDriver.get("https://www.linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
 
@@ -69,7 +74,7 @@ public class LoginTest {
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/", "Page URL is wrong");
     }
 
-    @Test
+    @Test(priority = 2)
     public void negativePasswordTest() throws InterruptedException {
         webDriver.get("https://www.linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
@@ -80,6 +85,4 @@ public class LoginTest {
 
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME", "Login Submit Page URL is wrong");
     }
-
-
 }
