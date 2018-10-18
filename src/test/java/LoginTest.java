@@ -57,8 +57,10 @@ public class LoginTest {
         loginPage.login("vlad.kalinin.qa24@gmail.com","vvkalinin20");
 
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/feed/", "Home Page URL is wrong");
-        Assert.assertEquals(webDriver.getTitle(), "LinkedIn", "Home page title is wrong");
-        //li[@id='profile-nav-item']
+        Assert.assertEquals(webDriver.getTitle(), "LinkedIn", "Home page title is wrong"); //li[@id='profile-nav-item']
+
+        HomePage homePage = new HomePage(webDriver);
+        Assert.assertTrue(homePage.getInitElements().isDisplayed(), "profileNavItem is not displayed on login page");
 
     }
 
