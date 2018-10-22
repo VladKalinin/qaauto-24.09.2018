@@ -41,13 +41,25 @@ public class LoginTest {
      * PostConditions:
      * - Close Firefox - done
      */
+
+    //successfulLoginTest
+    //passwordFieldIsEmptyTest
+    //allFieldsEmptyTest
+
+    //emailIsEmptyTest
+
+    //emailWrongTest
+    //shortEmailTest
+    //passwordIsWrongTest
+    //shortPasswordTest
+
+
     @Test
     public void successfulLoginTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("vlad.kalinin.qa24@gmail.com", "vvkalinin20");
-        HomePage homePage = new HomePage(webDriver);
+        HomePage homePage =loginPage.login("vlad.kalinin.qa24@gmail.com", "vvkalinin20");
         sleep(3000);
         Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
     }
@@ -71,6 +83,9 @@ public class LoginTest {
         sleep(3000);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
     }
+
+
+
 
 
     @Test
