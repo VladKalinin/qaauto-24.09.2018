@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static java.lang.Thread.sleep;
+
 public class LoginPage{
 
     //String logInEmail = "vlad.kalinin.qa24@gmail.com";
@@ -56,6 +58,30 @@ public class LoginPage{
         return PageFactory.initElements(webDriver, expectedPage);
     }
 
+/*
+    public <T> T login(String userName, String userPassword){
+        emailField.sendKeys(userName);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+
+
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        if (webDriver.getCurrentUrl().contains("/feed")){
+            return (T) new HomePage(webDriver);
+        }
+        if (webDriver.getCurrentUrl().contains("=GUEST_HOME")){
+            return (T) new GuestHomePage(webDriver);
+        }else {
+            return (T) new LoginPage(webDriver);
+        }
+    }
+*/
 
     public boolean isPageLoaded(){
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/")

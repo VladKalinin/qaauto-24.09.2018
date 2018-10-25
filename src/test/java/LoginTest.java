@@ -55,6 +55,7 @@ public class LoginTest {
     //shortPasswordTest
 
 
+
     @Test
     public void successfulLoginTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
@@ -76,6 +77,17 @@ public class LoginTest {
         sleep(3000);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
     }
+
+//    @Test
+//    public void passwordFieldIsEmptyTest() throws InterruptedException {
+//        webDriver.navigate().to("https://linkedin.com/");
+//        //LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
+//        LoginPage loginPage = new LoginPage(webDriver);
+//        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
+//        loginPage.login("vlad.kalinin.qa24@gmail.com", "");
+//        sleep(3000);
+//        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
+//    }
 
     @Test
     public void allFieldsEmptyTest() throws InterruptedException {
