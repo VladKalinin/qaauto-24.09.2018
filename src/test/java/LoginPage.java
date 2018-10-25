@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage{
 
     //String logInEmail = "vlad.kalinin.qa24@gmail.com";
     //String passwordData = "vvkalinin20";
@@ -25,12 +25,37 @@ public class LoginPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public HomePage login(String userName, String userPassword){
+/*
+    public HomePage loginHomePage(String userName, String userPassword){
         emailField.sendKeys(userName);
         passwordField.sendKeys(userPassword);
         signInButton.click();
         return new HomePage(webDriver);
     }
+
+    public LoginPage loginLoginPage(String userName, String userPassword){
+        emailField.sendKeys(userName);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+        return new LoginPage(webDriver);
+    }
+
+    public GuestHomePage loginGuestHomePage(String userName, String userPassword){
+        emailField.sendKeys(userName);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+        return new GuestHomePage(webDriver);
+    }
+*/
+
+
+    public <T> T login(String userName, String userPassword, Class<T> expectedPage){
+        emailField.sendKeys(userName);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+        return PageFactory.initElements(webDriver, expectedPage);
+    }
+
 
     public boolean isPageLoaded(){
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/")
@@ -42,4 +67,5 @@ public class LoginPage {
     public boolean isSignInButtonDisplayed(){
         return signInButton.isDisplayed();
     }
+
 }

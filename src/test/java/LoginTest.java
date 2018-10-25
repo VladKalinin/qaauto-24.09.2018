@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -57,9 +58,11 @@ public class LoginTest {
     @Test
     public void successfulLoginTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        //LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        HomePage homePage =loginPage.login("vlad.kalinin.qa24@gmail.com", "vvkalinin20");
+        //HomePage homePage = loginPage.loginHomePage("vlad.kalinin.qa24@gmail.com", "vvkalinin20");
+        HomePage homePage = loginPage.login("vlad.kalinin.qa24@gmail.com", "vvkalinin20",HomePage.class);
         sleep(3000);
         Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
     }
@@ -67,9 +70,9 @@ public class LoginTest {
     @Test
     public void passwordFieldIsEmptyTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("vlad.kalinin.qa24@gmail.com", "");
+        loginPage.login("vlad.kalinin.qa24@gmail.com", "",LoginPage.class);
         sleep(3000);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
     }
@@ -77,23 +80,19 @@ public class LoginTest {
     @Test
     public void allFieldsEmptyTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("", "");
+        loginPage.login("", "",LoginPage.class);
         sleep(3000);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
     }
 
-
-
-
-
     @Test
     public void emailIsEmptyTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("", "test12");
+        loginPage.login("", "test12",LoginPage.class);
         sleep(3000);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
     }
@@ -103,10 +102,10 @@ public class LoginTest {
     @Test
     public void emailWrongTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("asdf", "test12");
-        GuestHomePage guestHomePage = new GuestHomePage(webDriver);
+        GuestHomePage guestHomePage = loginPage.login("asdf", "test12",GuestHomePage.class);
+        //GuestHomePage guestHomePage = new GuestHomePage(webDriver);
         sleep(3000);
         Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
         Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
@@ -116,10 +115,10 @@ public class LoginTest {
     @Test
     public void shortEmailTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("as", "test12");
-        GuestHomePage guestHomePage = new GuestHomePage(webDriver);
+        GuestHomePage guestHomePage = loginPage.login("as", "test12",GuestHomePage.class);
+        //GuestHomePage guestHomePage = new GuestHomePage(webDriver);
         sleep(3000);
         Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
         Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
@@ -129,10 +128,10 @@ public class LoginTest {
     @Test
     public void passwordIsWrongTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("vlad.kalinin.qa24@gmail.com", "test12");
-        GuestHomePage guestHomePage = new GuestHomePage(webDriver);
+        GuestHomePage guestHomePage = loginPage.login("vlad.kalinin.qa24@gmail.com", "test12",GuestHomePage.class);
+        //GuestHomePage guestHomePage = new GuestHomePage(webDriver);
         sleep(3000);
         Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
         Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
@@ -142,10 +141,10 @@ public class LoginTest {
     @Test
     public void shortPasswordTest() throws InterruptedException {
         webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("vlad.kalinin.qa24@gmail.com", "test1");
-        GuestHomePage guestHomePage = new GuestHomePage(webDriver);
+        GuestHomePage guestHomePage = loginPage.login("vlad.kalinin.qa24@gmail.com", "test1",GuestHomePage.class);
+        //GuestHomePage guestHomePage = new GuestHomePage(webDriver);
         sleep(3000);
         Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
         Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
