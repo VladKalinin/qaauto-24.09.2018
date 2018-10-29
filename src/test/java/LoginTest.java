@@ -38,10 +38,7 @@ public class LoginTest {
         return new Object[][]{
                 { "", "vvkalinin20" },
                 { "vlad.kalinin.QA24@gmail.com", "" },
-                { "", "" },
-                {"as2sd", ""},
-                {"", "asc sdb123r"},
-                {"a2B@c", ""}
+                { "", ""}
         };
     }
 
@@ -106,86 +103,4 @@ public class LoginTest {
         Assert.assertEquals(guestHomePage.loginErrorTextDisplayed(), errorLoginMessage, "Email Error message is absent");
         Assert.assertEquals(guestHomePage.passwordErrorTextDisplayed(), errorPasswordMessage, "Password Error message is absent");
     }
-
-    /*
-    @Test
-    public void passwordFieldIsEmptyTest() throws InterruptedException {
-        webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("vlad.kalinin.qa24@gmail.com", "",LoginPage.class);
-        sleep(3000);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-    }
-
-    @Test
-    public void allFieldsEmptyTest() throws InterruptedException {
-        webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("", "",LoginPage.class);
-        sleep(3000);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-    }
-
-    @Test
-    public void emailIsEmptyTest() throws InterruptedException {
-        webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login("", "test12",LoginPage.class);
-        sleep(3000);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-    }
-
-    --------------------------------------
-
-    @Test
-    public void emailWrongTest() throws InterruptedException {
-        webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        GuestHomePage guestHomePage = loginPage.login("asdf", "test12",GuestHomePage.class);
-        sleep(3000);
-        Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
-        Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
-        Assert.assertEquals(guestHomePage.loginErrorTextDisplayed(), "Укажите действительный адрес эл. почты.", "Email Error message is absent");
-    }
-
-    @Test
-    public void shortEmailTest() throws InterruptedException {
-        webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        GuestHomePage guestHomePage = loginPage.login("as", "test12",GuestHomePage.class);
-        sleep(3000);
-        Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
-        Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
-        Assert.assertEquals(guestHomePage.loginErrorTextDisplayed(), "Слишком короткий текст (минимальная длина – 3 симв., введено – 2 симв.).", "Email Error message is absent");
-    }
-
-    @Test
-    public void passwordIsWrongTest() throws InterruptedException {
-        webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        GuestHomePage guestHomePage = loginPage.login("vlad.kalinin.qa24@gmail.com", "test12",GuestHomePage.class);
-        sleep(3000);
-        Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
-        Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
-        Assert.assertEquals(guestHomePage.passwordErrorTextDisplayed(), "Укажите действительный адрес эл. почты.", "Password Error message is absent");
-    }
-
-    @Test
-    public void shortPasswordTest() throws InterruptedException {
-        webDriver.navigate().to("https://linkedin.com/");
-        LoginPage loginPage = PageFactory.initElements(webDriver, LoginPage.class);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        GuestHomePage guestHomePage = loginPage.login("vlad.kalinin.qa24@gmail.com", "test1",GuestHomePage.class);
-        sleep(3000);
-        Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
-        Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert Error message is absent");
-        Assert.assertEquals(guestHomePage.passwordErrorTextDisplayed(), "Пароль должен содержать не менее 6 символов.", "Password Error message is absent");
-    }
-    */
 }
