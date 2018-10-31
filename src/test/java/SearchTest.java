@@ -59,21 +59,22 @@ public class SearchTest {
 
         String searchText = "HR";
         List<WebElement> listElements = webDriver.findElements(By.xpath("//*[@class='search-result__wrapper']"));
-        for (int i = 0; i < listElements.size(); i++) {
-            String elementText = listElements.get(i).getText();
-            System.out.println(elementText);
+        Assert.assertEquals(listElements.size(), 10, "More or less the 10 results");
 
-            if (Pattern.compile(searchText, Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(elementText).find()) {
+            for (int i = 0; i < listElements.size(); i++) {
+                String elementText = listElements.get(i).getText();
+                System.out.println(elementText);
+
+                if (Pattern.compile(searchText, Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(elementText).find()) {
+                    System.out.println(" ");
+                    System.out.println("-->searchTerm " + searchText + " was found");
+                } else {
+                    System.out.println(" ");
+                    System.out.println("-->searchTerm " + searchText + " not found");
+                }
+
                 System.out.println(" ");
-                System.out.println("-->searchTerm " + searchText + " was found");
-            } else {
                 System.out.println(" ");
-                System.out.println("-->searchTerm " + searchText + " not found");
             }
-
-            System.out.println(" ");
-            System.out.println(" ");
-        }
-
     }
 }

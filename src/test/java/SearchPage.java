@@ -10,6 +10,8 @@ public class SearchPage {
     @FindBy(xpath = "//li[@id='profile-nav-item']")
     private WebElement searchResultItem;
 
+    @FindBy(xpath = "//*[@class='search-result__wrapper']")
+    private WebElement searchResultWrapper;
 
     public SearchPage(WebDriver webDriver){
         this.webDriver = webDriver;
@@ -19,10 +21,14 @@ public class SearchPage {
     public boolean isSearchPageItemsAreDisplayed(){
         return searchResultItem.isDisplayed();
     }
+    public boolean isSearchPageWrapperAreDisplayed(){
+        return searchResultWrapper.isDisplayed();
+    }
 
     public boolean isSearchPageLoaded(){
         return webDriver.getCurrentUrl().contains("https://www.linkedin.com/search/results/")
-                && isSearchPageItemsAreDisplayed();
+                && isSearchPageItemsAreDisplayed()
+                && isSearchPageWrapperAreDisplayed();
     }
 
 }
