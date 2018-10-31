@@ -38,8 +38,6 @@ public class SearchTest {
      * - Verify that Login page is loaded
      * - Login with valid credentials
      * - Verify that Home page is loaded
-     *
-     *
      * - Enter 'searchTerm' into search field and press RETURN key
      * - Verify that Search page is loaded
      * - Verify 10 searchResults displayed on page
@@ -53,11 +51,12 @@ public class SearchTest {
         sleep(3000);
         Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
 
-        SearchPage searchPage = homePage.serchTermFieldSearchAction("HR", SearchPage.class);
-        sleep(3000);
+        String searchText = "HR";
+
+        SearchPage searchPage = homePage.serchTermFieldSearchAction(searchText, SearchPage.class);
+        sleep(10000);
         Assert.assertTrue(searchPage.isSearchPageLoaded(), "Search Page is not loaded");
 
-        String searchText = "HR";
         List<WebElement> listElements = webDriver.findElements(By.xpath("//*[@class='search-result__wrapper']"));
         Assert.assertEquals(listElements.size(), 10, "More or less the 10 results");
 
@@ -66,15 +65,15 @@ public class SearchTest {
                 System.out.println(elementText);
 
                 if (Pattern.compile(searchText, Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(elementText).find()) {
-                    System.out.println(" ");
-                    System.out.println("-->searchTerm " + searchText + " was found");
+                    System.out.println(i + " contains searchTerm");
+                    System.out.println("-->+searchTerm " + searchText + " was found");
                 } else {
                     System.out.println(" ");
                     System.out.println("-->searchTerm " + searchText + " not found");
                 }
-
                 System.out.println(" ");
                 System.out.println(" ");
             }
+
     }
 }
