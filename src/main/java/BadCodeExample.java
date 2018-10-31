@@ -20,11 +20,6 @@ public class BadCodeExample {
 
         searchField.sendKeys(searchTerm);
         searchField.submit();
-        //searchField.sendKeys(Keys.Enter)
-
-        //*[@class='LC20lb'] - my example
-        //div[@class='srg']/div[@class='g'] - class example(this example is more secured (ЖПК))
-
 
         sleep(3000);
         List<WebElement> searchResults = webDriver.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
@@ -48,21 +43,6 @@ public class BadCodeExample {
             System.out.println(" ");
         }
 
-        /*
-        for (WebElement searchResult : searchResults) {
-             String searchResultText = searchResults.getText;
-             System.out.println(searchResult.getText());
-             if(searchResultText.toLowerCase().contains(searchTerm)){
-                System.out.println(" ");
-                System.out.println("-->searchTerm " + searchTerm + " was found");
-             }
-             else {
-                System.out.println(" ");
-                System.out.println("-->searchTerm " + searchTerm + " not found");}
-             }
-
-        }
-        */
 
     }
 
