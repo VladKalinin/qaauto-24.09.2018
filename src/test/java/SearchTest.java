@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -50,30 +48,10 @@ public class SearchTest {
         HomePage homePage = loginPage.login("vlad.kalinin.qa24@gmail.com","vvkalinin20",HomePage.class);
         sleep(3000);
         Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
-
-        String searchText = "HR";
-
-        SearchPage searchPage = homePage.serchTermFieldSearchAction(searchText, SearchPage.class);
+        SearchPage searchPage = homePage.serchTermFieldSearchAction("HR", SearchPage.class);
         sleep(10000);
         Assert.assertTrue(searchPage.isSearchPageLoaded(), "Search Page is not loaded");
-
-        List<WebElement> listElements = webDriver.findElements(By.xpath("//*[@class='search-result__wrapper']"));
-        Assert.assertEquals(listElements.size(), 10, "More or less the 10 results");
-
-            for (int i = 0; i < listElements.size(); i++) {
-                String elementText = listElements.get(i).getText();
-                System.out.println(elementText);
-
-                if (Pattern.compile(searchText, Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(elementText).find()) {
-                    System.out.println(i + " contains searchTerm");
-                    System.out.println("-->+searchTerm " + searchText + " was found");
-                } else {
-                    System.out.println(" ");
-                    System.out.println("-->searchTerm " + searchText + " not found");
-                }
-                System.out.println(" ");
-                System.out.println(" ");
-            }
-
+        Assert.assertEquals(searchPage.listElements.size(), 10, "More or less the 10 results");
+        Assert.assertTrue(searchPage.isSearchTermPresent("HR"), "Search Term does not present");
     }
 }
