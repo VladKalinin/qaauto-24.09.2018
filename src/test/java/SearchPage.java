@@ -1,12 +1,9 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class SearchPage {
     private WebDriver webDriver;
@@ -14,11 +11,12 @@ public class SearchPage {
     @FindBy(xpath = "//li[@id='profile-nav-item']")
     private WebElement searchResultItem;
 
-    @FindBy(xpath = "//*[@class='search-result__wrapper']")
-    private WebElement searchResultWrapper;
+    @FindBy(xpath = "//div[@class='neptune-grid']")
+    private WebElement searchBarItem;
 
     @FindBy(xpath = "//*[@class='search-result__wrapper']")
-    List<WebElement> listElements;
+    //@FindBy(xpath = "//ul[contains(@class, 'search-results__list')]/li[contains(@class, 'occluded')]")
+    List <WebElement> listElements;
 
     public SearchPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -29,16 +27,18 @@ public class SearchPage {
         return searchResultItem.isDisplayed();
     }
 
-    public boolean isSearchPageWrapperAreDisplayed() {
-        return searchResultWrapper.isDisplayed();
+    public boolean isSearchBarFilterItemIsDisplayed() {
+        return searchBarItem.isDisplayed();
+    }
+
+    public int searchElementsNumberDisplayed() {
+        return listElements.size();
     }
 
 
 
     public boolean isSearchTermPresent(String searchTerm) {
-        JavascriptExecutor jse = (JavascriptExecutor)webDriver;
         for(WebElement element: listElements){
-            jse.executeScript("window.scrollBy(0,250)", "");
             String elementText = element.getText();
             System.out.println(elementText);
             System.out.println();
@@ -52,8 +52,11 @@ public class SearchPage {
     }
 
     public boolean isSearchPageLoaded() {
+        JavascriptExecutor jse = (JavascriptExecutor)webDriver;
+        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
         return webDriver.getCurrentUrl().contains("https://www.linkedin.com/search/results/")
                 && isSearchPageItemsAreDisplayed()
-                && isSearchPageWrapperAreDisplayed();
+                && isSearchBarFilterItemIsDisplayed();
     }
 }
