@@ -9,12 +9,15 @@ import static java.lang.Thread.sleep;
 public class LoginPage{
 
     //String logInEmail = "vlad.kalinin.qa24@gmail.com";
-    //String passwordData = "vvkalinin20";
+    //String passwordData = "Test123@";
 
     private WebDriver webDriver;
 
     @FindBy(xpath = "//*[@id='login-email']")
     private WebElement emailField;
+
+    @FindBy(xpath = "//a[@class='link-forgot-password']")
+    private WebElement passwordRestButton;
 
     @FindBy(xpath = "//*[@id='login-password']")
     private WebElement passwordField;
@@ -35,11 +38,18 @@ public class LoginPage{
         return PageFactory.initElements(webDriver, expectedPage);
     }
 
+    public <T> T forgetPassword( Class<T> expectedPage){
+        passwordRestButton.click();
+        return PageFactory.initElements(webDriver, expectedPage);
+    }
+
+
 
     public boolean isPageLoaded(){
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/")
                 && webDriver.getTitle().equals("LinkedIn: Войти или зарегистрироваться")
-                && isSignInButtonDisplayed();
+                && isSignInButtonDisplayed()
+                && passwordRestButton.isDisplayed();
     }
 
 

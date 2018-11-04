@@ -42,6 +42,21 @@ public class SearchTest {
      * - Verify each result item contains 'searchTerm'
      */
 
+
+    //Home Task #10
+    //
+    //
+    // Add test for Reset Password
+    //    - explore Reset Password scenario manually before automation
+    //    - create test scenario with all necessary page objects
+    //    - Put sleep for few minutes in place where test should get password recovery link from email
+    //          (While test is sleeping you'll need to get a link from email manually and navigate to that link in Browser
+    //           that was opened by test so that after sleep Test could proceed with next steps)
+    //
+    //    - You test scenario should end up logged in with new password on Home page
+    //
+    //    Note: Use PageObject and PageFactory patterns. Avoid using any bad practices.
+
     @Test
     public void basicSearchTest() throws InterruptedException {
 
