@@ -24,8 +24,9 @@ public class PasswordResetPage {
                 && passwordResetButton.isDisplayed();
     }
 
-    public void passwordResetAction(String userName){
+    public <T> T passwordResetAction(String userName, Class<T> expectedPage){
         userLoginField.sendKeys(userName);
         passwordResetButton.click();
+        return PageFactory.initElements(webDriver, expectedPage);
     }
 }

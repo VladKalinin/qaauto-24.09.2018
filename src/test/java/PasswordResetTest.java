@@ -44,18 +44,19 @@ public class PasswordResetTest {
      * - Close browser
      */
 
+
     @Test
     public void basicSearchTest() throws InterruptedException {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
         PasswordResetPage passwordResetPage = loginPage.forgetPassword(PasswordResetPage.class);
         Assert.assertTrue(passwordResetPage.isPasswordResetPageLoaded(), "Password Reset Page is not loaded");
         sleep(2000);
-        passwordResetPage.passwordResetAction("vlad.kalinin.qa24@gmail.com");
+        CheckLinkWasSentPage checkLinkWasSentPage=passwordResetPage.passwordResetAction("vlad.kalinin.qa24@gmail.com", CheckLinkWasSentPage.class);
+        Assert.assertTrue(checkLinkWasSentPage.isPasswordResetLinkWasSend(), "Password reset link was not send");
+        Assert.assertEquals(checkLinkWasSentPage.bannerConfirmedTextIsDislayed(), "Мы отправили вам ссылку по эл. почте", "Banner message is absent");
         sleep(60000);
         webDriver.getCurrentUrl();
-
         FromEmailPasswordResetPage fromEmailPasswordResetPage = new FromEmailPasswordResetPage(webDriver);
-
         Assert.assertTrue(fromEmailPasswordResetPage.isAfterPasswordResetPageLoaded(), "Password Reset page from Email is loaded");
         PasswordResetSubmitPage passwordResetSubmitPage = fromEmailPasswordResetPage.passwordResetActionNewPage("Test123@","Test123@", PasswordResetSubmitPage.class);
         sleep(2000);

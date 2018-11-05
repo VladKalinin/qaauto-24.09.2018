@@ -27,6 +27,8 @@ public class FromEmailPasswordResetPage {
                 && passwordResetButton.isDisplayed();
     }
 
+
+
     public <T> T passwordResetActionNewPage(String newPassword,String confirmNewPassword, Class<T> expectedPage){
         inputNewPasswordField.sendKeys(newPassword);
         inputConfirmNewPasswordField.sendKeys(confirmNewPassword);
