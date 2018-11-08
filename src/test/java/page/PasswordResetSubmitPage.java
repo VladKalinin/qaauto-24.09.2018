@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,9 +29,9 @@ public class PasswordResetSubmitPage {
         return bannerPasswordResetSubmitPage.getText();
     }
 
-    public <T> T goToHomePage( Class<T> expectedPage){
+    public HomePage goToHomePage(){
         goToHomePage.click();
-        return PageFactory.initElements(webDriver, expectedPage);
+        return PageFactory.initElements(webDriver, HomePage.class);
     }
 
 }

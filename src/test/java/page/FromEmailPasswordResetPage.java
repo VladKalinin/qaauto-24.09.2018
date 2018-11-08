@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,10 +31,10 @@ public class FromEmailPasswordResetPage {
 
 
 
-    public <T> T passwordResetActionNewPage(String newPassword,String confirmNewPassword, Class<T> expectedPage){
+    public PasswordResetSubmitPage passwordResetActionNewPage(String newPassword,String confirmNewPassword){
         inputNewPasswordField.sendKeys(newPassword);
         inputConfirmNewPasswordField.sendKeys(confirmNewPassword);
         passwordResetButton.click();
-        return PageFactory.initElements(webDriver, expectedPage);
+        return PageFactory.initElements(webDriver, PasswordResetSubmitPage.class);
     }
 }

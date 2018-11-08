@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,9 +40,9 @@ public class LoginPage{
         return PageFactory.initElements(webDriver, expectedPage);
     }
 
-    public <T> T forgetPassword( Class<T> expectedPage){
+    public PasswordResetPage forgetPassword(){
         passwordRestButton.click();
-        return PageFactory.initElements(webDriver, expectedPage);
+        return PageFactory.initElements(webDriver, PasswordResetPage.class);
     }
 
 

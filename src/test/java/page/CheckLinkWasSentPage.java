@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,14 +19,15 @@ public class CheckLinkWasSentPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public boolean isPasswordResetLinkWasSend() {
-        return webDriver.getCurrentUrl().contains("https://www.linkedin.com/uas/request-password-reset")
-                && messageWasSend.isDisplayed()
-                && resendLinkButton.isDisplayed();
-
-    }
-
     public String bannerConfirmedTextIsDislayed(){
         return messageWasSend.getText();
+    }
+
+    public boolean isPasswordResetLinkWasSend() {
+        return webDriver.getCurrentUrl().contains("https://www.linkedin.com/checkpoint")
+                && messageWasSend.isDisplayed()
+                && resendLinkButton.isDisplayed()
+                ;
+
     }
 }
