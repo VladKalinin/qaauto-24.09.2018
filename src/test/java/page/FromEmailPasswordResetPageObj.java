@@ -5,7 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class FromEmailPasswordResetPage {
+/**
+ * LinkedIn FromEmailPasswordResetPage Object class
+ */
+public class FromEmailPasswordResetPageObj {
     private WebDriver webDriver;
 
     @FindBy(xpath = "//input[@id = 'newPassword']")
@@ -17,11 +20,19 @@ public class FromEmailPasswordResetPage {
     @FindBy(xpath = "//button[@id = 'reset-password-submit-button']")
     private WebElement passwordResetButton;
 
-    public FromEmailPasswordResetPage(WebDriver webDriver){
+    /**
+     * LinkedIn LoginPage Object constructor
+     * @param webDriver - test instance
+     */
+    public FromEmailPasswordResetPageObj(WebDriver webDriver){
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Verify isAfterPasswordResetPageLoaded Method
+     * @return - boolean statement if the isAfterPasswordResetPageLoaded is loaded or not
+     */
     public boolean isAfterPasswordResetPageLoaded(){
         return webDriver.getCurrentUrl().contains("https://www.linkedin.com/checkpoint/rp/password-reset")
                 && inputNewPasswordField.isDisplayed()
@@ -29,12 +40,16 @@ public class FromEmailPasswordResetPage {
                 && passwordResetButton.isDisplayed();
     }
 
-
-
-    public PasswordResetSubmitPage passwordResetActionNewPage(String newPassword,String confirmNewPassword){
+    /**
+     * LinkedIn passwordResetActionNewPage Method
+     * @param newPassword - String with newPassword
+     * @param confirmNewPassword - String with confirmNewPassword
+     * @return - expected page: PasswordResetSubmitPage
+     */
+    public PasswordResetSubmitPageObj passwordResetActionNewPage(String newPassword, String confirmNewPassword){
         inputNewPasswordField.sendKeys(newPassword);
         inputConfirmNewPasswordField.sendKeys(confirmNewPassword);
         passwordResetButton.click();
-        return PageFactory.initElements(webDriver, PasswordResetSubmitPage.class);
+        return PageFactory.initElements(webDriver, PasswordResetSubmitPageObj.class);
     }
 }

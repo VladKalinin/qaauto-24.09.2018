@@ -1,15 +1,16 @@
 package page;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import util.GMailService;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class PasswordResetPage {
+/**
+ * LinkedIn PasswordResetPage Object class
+ */
+public class PasswordResetPageObj {
     private WebDriver webDriver;
 
     String passwordChangeLink;
@@ -20,19 +21,33 @@ public class PasswordResetPage {
     @FindBy(xpath = "//button[@id = 'reset-password-submit-button']")
     private WebElement passwordResetButton;
 
-
-    public PasswordResetPage(WebDriver webDriver){
+    /**
+     * LinkedIn LoginPage Object constructor
+     * @param webDriver - test instance
+     */
+    public PasswordResetPageObj(WebDriver webDriver){
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Verify isPasswordResetPageLoaded Method
+     * @return - boolean statement if the PasswordResetPageLoaded is loaded or not
+     */
     public boolean isPasswordResetPageLoaded() {
         return webDriver.getCurrentUrl().contains("https://www.linkedin.com/uas/request-password-reset")
                 && userLoginField.isDisplayed()
                 && passwordResetButton.isDisplayed();
     }
 
-    public CheckLinkWasSentPage passwordResetAction(String userName){
+    /**
+     * LinkedIn passwordResetAction Method
+     * @param userName - String userEmailPhone (login data)
+     * @return - expected page: PasswordResetCheckpointPage
+     *
+     * FYI: in this method we analyse the if there is passwordResetLink was sent to mail or not
+     */
+    public PasswordResetCheckpointPageObj passwordResetAction(String userName){
 
         GMailService gMailService = new GMailService();
         gMailService.connect();
@@ -45,27 +60,18 @@ public class PasswordResetPage {
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println(message);
 
-        //ToDo: String bar = StringUtils.substringBetween(message, "****", "***"); //Why it does not work
-        //String passwordChangelink = StringUtils.substringBetween(message, "****", "***");
-        //passwordChangelink.replace("amp;","");
+        String passwordChangelink = StringUtils.substringBetween(message, "Чтобы изменить пароль в LinkedIn, нажмите <a href=\"", ">здесь</a>");
+        passwordChangelink.replace("amp;","");
 
-        Pattern stringLocatorElements = Pattern.compile("href=\"(.*?)\"");
-        Matcher sourceString = stringLocatorElements.matcher(message);
-        String passwordChangeUrl = "";
-        for(int i = 0; i < 3; i++) {
-            if (sourceString.find()) {
-                 passwordChangeUrl= sourceString.group(1).replace("amp;","");
-            }
-        }
-
-        passwordChangeLink = passwordChangeUrl;
-        System.out.println(passwordChangeLink);
-
-        return PageFactory.initElements(webDriver, CheckLinkWasSentPage.class);
+        return PageFactory.initElements(webDriver, PasswordResetCheckpointPageObj.class);
     }
 
-    public FromEmailPasswordResetPage navigateToLink(){
+    /**
+     * LinkedIn FromEmailPasswordResetPage Method
+     * @return - expected page: FromEmailPasswordResetPage
+     */
+    public FromEmailPasswordResetPageObj navigateToLink(){
         webDriver.navigate().to(passwordChangeLink);
-        return PageFactory.initElements(webDriver, FromEmailPasswordResetPage.class);
+        return PageFactory.initElements(webDriver, FromEmailPasswordResetPageObj.class);
     }
 }

@@ -3,8 +3,8 @@ package test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.*;
-
 import static java.lang.Thread.sleep;
+
 
 public class PasswordResetTest extends BaseTest {
 
@@ -32,20 +32,20 @@ public class PasswordResetTest extends BaseTest {
     @Test
     public void basicSearchTest() throws InterruptedException {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        PasswordResetPage passwordResetPage = loginPage.forgetPassword();
-        Assert.assertTrue(passwordResetPage.isPasswordResetPageLoaded(), "Password Reset Page is not loaded");
+        PasswordResetPageObj passwordResetPageObj = loginPage.forgetPassword();
+        Assert.assertTrue(passwordResetPageObj.isPasswordResetPageLoaded(), "Password Reset Page is not loaded");
         sleep(5000);
-        CheckLinkWasSentPage checkLinkWasSentPage=passwordResetPage.passwordResetAction("vlad.kalinin.qa24@gmail.com");
-        Assert.assertTrue(checkLinkWasSentPage.isPasswordResetLinkWasSend(), "Password reset link was not send");
-        Assert.assertEquals(checkLinkWasSentPage.bannerConfirmedTextIsDislayed(), "Мы отправили вам ссылку по эл. почте", "Banner message is absent");
+        PasswordResetCheckpointPageObj passwordResetCheckpointPageObj = passwordResetPageObj.passwordResetAction("vlad.kalinin.qa24@gmail.com");
+        Assert.assertTrue(passwordResetCheckpointPageObj.isPasswordResetLinkWasSend(), "Password reset link was not send");
+        Assert.assertEquals(passwordResetCheckpointPageObj.bannerConfirmedTextIsDislayed(), "Мы отправили вам ссылку по эл. почте", "Banner message is absent");
         sleep(60000);
-        FromEmailPasswordResetPage fromEmailPasswordResetPage = passwordResetPage.navigateToLink();
-        Assert.assertTrue(fromEmailPasswordResetPage.isAfterPasswordResetPageLoaded(), "Password Reset page from Email is loaded");
-        PasswordResetSubmitPage passwordResetSubmitPage = fromEmailPasswordResetPage.passwordResetActionNewPage("Test123@","Test123@");
+        FromEmailPasswordResetPageObj fromEmailPasswordResetPageObj = passwordResetPageObj.navigateToLink();
+        Assert.assertTrue(fromEmailPasswordResetPageObj.isAfterPasswordResetPageLoaded(), "Password Reset page from Email is loaded");
+        PasswordResetSubmitPageObj passwordResetSubmitPageObj = fromEmailPasswordResetPageObj.passwordResetActionNewPage("Test123@","Test123@");
         sleep(5000);
-        Assert.assertTrue(passwordResetSubmitPage.passwordResetSuccessfully(), "Password was not reset");
-        Assert.assertEquals(passwordResetSubmitPage.bannerTextIsDislayed(), "Ваш пароль успешно изменён", "Banner message is absent");
-        HomePage homePage = passwordResetSubmitPage.goToHomePage();
+        Assert.assertTrue(passwordResetSubmitPageObj.passwordResetSuccessfully(), "Password was not reset");
+        Assert.assertEquals(passwordResetSubmitPageObj.bannerTextIsDislayed(), "Ваш пароль успешно изменён", "Banner message is absent");
+        HomePage homePage = passwordResetSubmitPageObj.goToHomePage();
         sleep(5000);
         Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
 

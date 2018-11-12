@@ -3,9 +3,9 @@ package test;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import page.GuestHomePage;
+import page.LoginSubmitPageObj;
 import page.HomePage;
-import page.LoginPage;
+import page.LoginPageObj;
 
 import static java.lang.Thread.sleep;
 
@@ -69,7 +69,7 @@ public class LoginTest extends BaseTest{
     @Test(dataProvider = "emptyPageDataprovider")
     public void emptyLoginPasswordFieldsTest(String userEmail, String userPasswrod) throws InterruptedException {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        loginPage.login(userEmail, userPasswrod,LoginPage.class);
+        loginPage.login(userEmail, userPasswrod, LoginPageObj.class);
         sleep(3000);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
     }
@@ -77,11 +77,11 @@ public class LoginTest extends BaseTest{
     @Test(dataProvider ="wrongGuestHomeDataProvider")
     public void wrongDataTest(String userEmail, String userPasswrod, String errorLoginMessage,String errorPasswordMessage) throws InterruptedException {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login Page is not loaded");
-        GuestHomePage guestHomePage = loginPage.login(userEmail, userPasswrod,GuestHomePage.class);
+        LoginSubmitPageObj loginSubmitPageObj = loginPage.login(userEmail, userPasswrod, LoginSubmitPageObj.class);
         sleep(3000);
-        Assert.assertTrue(guestHomePage.isGuestHomePageLoaded(), "GuestHome is not loaded");
-        Assert.assertEquals(guestHomePage.alertErrorTextDisplayed(), "There were one or more errors in your submission. Please correct the marked fields below.", "Alert Error message is absent");
-        Assert.assertEquals(guestHomePage.loginErrorTextDisplayed(), errorLoginMessage, "Email Error message is absent");
-        Assert.assertEquals(guestHomePage.passwordErrorTextDisplayed(), errorPasswordMessage, "Password Error message is absent");
+        Assert.assertTrue(loginSubmitPageObj.isGuestHomePageLoaded(), "GuestHome is not loaded");
+        Assert.assertEquals(loginSubmitPageObj.alertErrorTextDisplayed(), "There were one or more errors in your submission. Please correct the marked fields below.", "Alert Error message is absent");
+        Assert.assertEquals(loginSubmitPageObj.loginErrorTextDisplayed(), errorLoginMessage, "Email Error message is absent");
+        Assert.assertEquals(loginSubmitPageObj.passwordErrorTextDisplayed(), errorPasswordMessage, "Password Error message is absent");
     }
 }
