@@ -84,4 +84,6 @@ public class LoginTest extends BaseTest{
         Assert.assertEquals(loginSubmitPageObj.loginErrorTextDisplayed(), errorLoginMessage, "Email Error message is absent");
         Assert.assertEquals(loginSubmitPageObj.passwordErrorTextDisplayed(), errorPasswordMessage, "Password Error message is absent");
     }
+
+    // test commit
 }
