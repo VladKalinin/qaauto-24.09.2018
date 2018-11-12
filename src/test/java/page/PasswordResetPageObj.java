@@ -10,7 +10,7 @@ import util.GMailService;
 /**
  * LinkedIn PasswordResetPage Object class
  */
-public class PasswordResetPageObj {
+public class PasswordResetPageObj extends BasePage {
     private WebDriver webDriver;
 
     String passwordChangeLink;
@@ -28,6 +28,7 @@ public class PasswordResetPageObj {
     public PasswordResetPageObj(WebDriver webDriver){
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+        waitUntilElementVisible(passwordResetButton, 10);
     }
 
     /**

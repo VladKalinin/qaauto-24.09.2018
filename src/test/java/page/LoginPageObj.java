@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
  * LinkedIn LoginPage Object class
  */
 
-public class LoginPageObj {
+public class LoginPageObj extends BasePage{
 
     private WebDriver webDriver;
 
@@ -32,6 +32,7 @@ public class LoginPageObj {
     public LoginPageObj(WebDriver webDriver){
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+        verifyElementIsVisible(signInButton, 5, "Login Page is not loaded");
     }
 
     /**
@@ -46,8 +47,17 @@ public class LoginPageObj {
         loginField.sendKeys(userName);
         passwordField.sendKeys(userPassword);
         signInButton.click();
-        return PageFactory.initElements(webDriver, expectedPage);
+        if (isUrlContains("/feed", 5)) {
+            return (T) new HomePage(webDriver);
+        }
+        if (isUrlContains("/login-submit", 5)) {
+            return (T) new LoginSubmitPageObj(webDriver);
+        }
+        else {
+            return (T) this;
+        }
     }
+
 
     /**
      * LinkedIn forgetPassword Method

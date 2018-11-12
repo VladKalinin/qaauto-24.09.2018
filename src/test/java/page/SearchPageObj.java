@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * LinkedIn SearchPage Object class
  */
-public class SearchPageObj {
+public class SearchPageObj extends BasePage{
     private WebDriver webDriver;
 
     @FindBy(xpath = "//div[@class='neptune-grid']")
@@ -26,6 +26,7 @@ public class SearchPageObj {
     public SearchPageObj(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+        waitUntilElementVisible(searchFilterBarItem, 10);
     }
 
     /**

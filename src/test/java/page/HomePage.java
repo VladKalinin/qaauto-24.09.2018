@@ -26,6 +26,7 @@ public class HomePage extends BasePage{
     public HomePage(WebDriver webDriver){
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+        waitUntilElementVisible(profileNavigationItem, 10);
     }
 
     /**

@@ -1,11 +1,9 @@
 package test;
 
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.HomePage;
 import page.SearchPageObj;
-import static java.lang.Thread.sleep;
 
 public class SearchTest extends BaseTest {
 
@@ -33,7 +31,6 @@ public class SearchTest extends BaseTest {
         HomePage homePage = loginPage.login("vlad.kalinin.qa24@gmail.com","vvkalinin20",HomePage.class);
         Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
         SearchPageObj searchPageObj = homePage.serchTermFieldSearchAction(searchTerm);
-        sleep(3000);
         Assert.assertTrue(searchPageObj.isSearchPageLoaded(), "Search Page is not loaded");
         Assert.assertEquals(searchPageObj.searchElementsNumberDisplayed(), 10, "More or less the 10 results");
         Assert.assertTrue(searchPageObj.isSearchTermPresent(searchTerm), "Search Term does not present");

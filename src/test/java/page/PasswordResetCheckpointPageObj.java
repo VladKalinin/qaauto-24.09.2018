@@ -39,8 +39,6 @@ public class PasswordResetCheckpointPageObj {
     public boolean isPasswordResetLinkWasSend() {
         return webDriver.getCurrentUrl().contains("https://www.linkedin.com/checkpoint")
                 && messageWasSend.isDisplayed()
-                && resendLinkButton.isDisplayed()
-                ;
-
+                && resendLinkButton.isDisplayed();
     }
 }
