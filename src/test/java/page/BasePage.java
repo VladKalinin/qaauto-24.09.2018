@@ -15,11 +15,23 @@ public class BasePage {
 
     WebDriver webDriver;
 
+    /**
+     * LinkedIn waitUntilElementVisible Method
+     * @param webElement - test instance
+     * @param timeOutInSec - time for element upload
+     */
     public void waitUntilElementVisible(WebElement webElement, int timeOutInSec) {
-        WebDriverWait wait = new WebDriverWait(webDriver, 5);
+        WebDriverWait wait = new WebDriverWait(webDriver, timeOutInSec);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
+
+    /**
+     * LinkedIn isUrlContains Method
+     * @param partialUrl - part of url
+     * @param timeOutInSec - time for element upload
+     * @return - return true/false
+     */
     protected boolean isUrlContains(String partialUrl, int timeOutInSec) {
         WebDriverWait wait = new WebDriverWait(webDriver, timeOutInSec);
         try {
@@ -27,14 +39,5 @@ public class BasePage {
         } catch (TimeoutException e) {
             return false;
         }
-    }
-
-    protected void verifyElementIsVisible(WebElement webElement, int timeOutInSec, String message) {
-        try {
-            waitUntilElementVisible(webElement, timeOutInSec);
-        } catch (TimeoutException e) {
-            throw new AssertionError(message);
-        }
-
     }
 }

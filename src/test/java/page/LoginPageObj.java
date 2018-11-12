@@ -11,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPageObj extends BasePage{
 
-    private WebDriver webDriver;
-
     @FindBy(xpath = "//*[@id='login-email']")
     private WebElement loginField;
 
@@ -32,7 +30,6 @@ public class LoginPageObj extends BasePage{
     public LoginPageObj(WebDriver webDriver){
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        verifyElementIsVisible(signInButton, 5, "Login Page is not loaded");
     }
 
     /**

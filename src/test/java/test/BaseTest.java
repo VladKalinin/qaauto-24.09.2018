@@ -11,6 +11,9 @@ public class BaseTest {
     private WebDriver webDriver;
     LoginPageObj loginPage;
 
+    /**
+     * BeforeMethod test Method
+     */
     @BeforeMethod
     public void beforeMethod(){
         webDriver = new FirefoxDriver();
@@ -18,6 +21,9 @@ public class BaseTest {
         loginPage = PageFactory.initElements(webDriver, LoginPageObj.class);
     }
 
+    /**
+     * AfterMethod test method
+     */
     @AfterMethod
     public void afterMethod(){
         webDriver.quit();
